@@ -1,5 +1,5 @@
-import { IAppState, IUser } from "../utils/interfaces";
-import LoginUser from "./LoginUser";
+import { IAppState } from "../utils/interfaces";
+// import LoginUser from "./LoginUser";
 
 interface NavigationBarProps {
   appState: IAppState;

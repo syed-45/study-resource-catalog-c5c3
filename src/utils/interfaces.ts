@@ -24,7 +24,7 @@ export interface IResource {
     summary: string;
     reccomendationText: string;
     reccomendationOptions: string
-};
+}
 
 export interface ISearchQuery {
     searchTerm: string;

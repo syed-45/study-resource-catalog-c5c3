@@ -5,7 +5,7 @@ export async function getUserList(): Promise <IUser[]> {
     const res = await axios.get(`http://localhost:4000/users`)
     const listOfUsers: IUser[] = [];
 
-    res.data.forEach((item: any) => {
+    res.data.forEach((item:any) => {
         listOfUsers.push({
             userID: item.user_id,
             username: item.user_name,

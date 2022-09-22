@@ -16,10 +16,10 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
     const getUsers = async () => {
       const listOfUsers: IUser[] = await getUserList();
       console.log(listOfUsers);
-      setAppState({ ...appState, userList: listOfUsers });
+      setAppState((appState) => ({ ...appState, userList: listOfUsers }));
     };
     getUsers();
-  }, []);
+  }, [setAppState]);
 
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     setSelectedUserId(e.target.value);

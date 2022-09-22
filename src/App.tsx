@@ -1,4 +1,3 @@
-import { greet } from "./utils/greet";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { initialiseAppState } from "./utils/initialiseAppState";
