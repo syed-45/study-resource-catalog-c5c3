@@ -1,11 +1,16 @@
 import axios from "axios";
 import {IUser} from './interfaces';
 
+interface IDBUSer {
+    user_id: number,
+    user_name: string,
+    is_faculty: boolean
+}
 export async function getUserList(): Promise <IUser[]> {
     const res = await axios.get(`http://localhost:4000/users`)
     const listOfUsers: IUser[] = [];
 
-    res.data.forEach((item:any) => {
+    res.data.forEach((item: IDBUSer) => {
         listOfUsers.push({
             userID: item.user_id,
             username: item.user_name,
