@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom";
 import { IAppState } from "../utils/interfaces";
-// import LoginUser from "./LoginUser";
 
 interface NavigationBarProps {
   appState: IAppState;
@@ -18,15 +18,19 @@ export default function NavigationBar({
     console.log("Submit Resource is working");
   }
   return (
-    <header>
+    <div>
       <h1> Welcome, {appState.loggedInUser?.username}</h1>
-      <button onClick={handleHomePage}> Home Page </button>
+      <button onClick={handleHomePage}>
+        <Link to="/">Home</Link>
+      </button>
       {appState.loggedInUser && (
         <button onClick={handleToStudyList}>My Study List </button>
       )}
       {appState.loggedInUser && (
-        <button onClick={handleToSubmitResource}>Sumbit Resource </button>
+        <button onClick={handleToSubmitResource}>
+          <Link to="/submit-resource">Submit Resource</Link>
+        </button>
       )}
-    </header>
+    </div>
   );
 }
