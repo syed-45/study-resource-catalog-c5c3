@@ -1,4 +1,4 @@
-import { IAppState } from "./utils/interfaces";
+import { IAppState } from "../utils/interfaces";
 
 interface DisplayResourcesProps {
   appState: IAppState;
