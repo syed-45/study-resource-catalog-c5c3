@@ -5,9 +5,6 @@ interface StudyResourcesProps {
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
 
-export function StudyResourcesProps({
-  appState,
-  setAppState,
-}: StudyResourcesProps) {
+export function StudyResources({ appState, setAppState }: StudyResourcesProps) {
   return <p>Study Resources Pages</p>;
 }

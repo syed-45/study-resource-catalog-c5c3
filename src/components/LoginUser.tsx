@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { IAppState } from "../utils/interfaces";
 import { IUser } from "../utils/interfaces";
 import { getUserList } from "../utils/getUserList";
+import { Link } from "react-router-dom";
 
 interface LoginUserProps {
   appState: IAppState;
@@ -74,7 +75,7 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
         })}
       </select>
       <button onClick={appState.loggedInUser ? logout : login}>
-        {appState.loggedInUser ? "LogOut" : "Login"}
+        <Link to="/">{appState.loggedInUser ? "LogOut" : "Login"}</Link>
       </button>
     </>
   );
