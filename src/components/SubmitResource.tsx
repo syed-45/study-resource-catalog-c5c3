@@ -5,6 +5,9 @@ interface SubmitResourceProps {
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
 
-export function SubmitResource({ appState, setAppState }: SubmitResourceProps) {
+export function SubmitResource({
+  appState,
+  setAppState,
+}: SubmitResourceProps): JSX.Element {
   return <p>Submit Resource Page</p>;
 }

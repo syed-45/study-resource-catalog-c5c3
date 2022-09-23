@@ -8,6 +8,6 @@ interface DisplayResourcesProps {
 export function DisplayResources({
   appState,
   setAppState,
-}: DisplayResourcesProps) {
+}: DisplayResourcesProps): JSX.Element {
   return <p>Display Resources Pages</p>;
 }
