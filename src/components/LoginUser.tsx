@@ -82,7 +82,3 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
 }
 
 export default LoginUser;
-
-// function getUsers () {
-//     return mock JSON = users[]
-// }
