@@ -1,8 +1,8 @@
-import { Outlet, Route, Routes } from "react-router-dom";
-import { DisplayResources } from "../DisplayResources";
-import { StudyResources } from "../StudyResources";
-import { SubmitResource } from "../SubmitResource";
+import { Route, Routes } from "react-router-dom";
 import { IAppState } from "../utils/interfaces";
+import { DisplayResources } from "./DisplayResources";
+import { StudyResources } from "./StudyResources";
+import { SubmitResource } from "./SubmitResource";
 
 interface MainProps {
   appState: IAppState;
