@@ -1,18 +1,19 @@
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { initialiseAppState } from "./utils/initialiseAppState";
-import { IAppState } from "./utils/interfaces";
 import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 import { Main } from "./components/Main";
+import { initialiseAppState } from "./utils/initialiseAppState";
 
 function App(): JSX.Element {
-  const [appState, setAppState] = useState<IAppState>(initialiseAppState());
-
+  const [appState, setAppState] = useState(initialiseAppState());
   return (
     <>
-      <Header appState={appState} setAppState={setAppState} />
-      <Main appState={appState} setAppState={setAppState} />
-      <Footer />
+      <BrowserRouter>
+        <Header appState={appState} setAppState={setAppState} />
+        <Main appState={appState} setAppState={setAppState} />
+        <Footer />
+      </BrowserRouter>
     </>
   );
 }
