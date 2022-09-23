@@ -3,6 +3,7 @@ import { IAppState } from "../utils/interfaces";
 import { IUser } from "../utils/interfaces";
 import { getUserList } from "../utils/getUserList";
 import { Link } from "react-router-dom";
+import { routes } from "../utils/routes";
 
 interface LoginUserProps {
   appState: IAppState;
@@ -75,7 +76,9 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
         })}
       </select>
       <button onClick={appState.loggedInUser ? logout : login}>
-        <Link to="/">{appState.loggedInUser ? "LogOut" : "Login"}</Link>
+        <Link to={routes.resources}>
+          {appState.loggedInUser ? "LogOut" : "Login"}
+        </Link>
       </button>
     </>
   );

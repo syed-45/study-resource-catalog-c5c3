@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { IAppState } from "../utils/interfaces";
+import { routes } from "../utils/routes";
 import { DisplayResources } from "./DisplayResources";
 import { StudyResources } from "./StudyResources";
 import { SubmitResource } from "./SubmitResource";
@@ -14,19 +15,19 @@ export function Main({ appState, setAppState }: MainProps): JSX.Element {
     <main>
       <Routes>
         <Route
-          path="/submit-resource"
+          path={routes.submitResource}
           element={
             <SubmitResource appState={appState} setAppState={setAppState} />
           }
         />
         <Route
-          path="/"
+          path={routes.studyResources}
           element={
             <StudyResources appState={appState} setAppState={setAppState} />
           }
         />
         <Route
-          path="/"
+          path={routes.resources}
           element={
             <DisplayResources appState={appState} setAppState={setAppState} />
           }

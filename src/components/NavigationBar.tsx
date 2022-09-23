@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { IAppState } from "../utils/interfaces";
+import { routes } from "../utils/routes";
 
 interface NavigationBarProps {
   appState: IAppState;
@@ -21,14 +22,16 @@ export default function NavigationBar({
     <div>
       <h1> Welcome, {appState.loggedInUser?.username}</h1>
       <button onClick={handleHomePage}>
-        <Link to="/">Home</Link>
+        <Link to={routes.resources}>Home</Link>
       </button>
       {appState.loggedInUser && (
-        <button onClick={handleToStudyList}>My Study List </button>
+        <button onClick={handleToStudyList}>
+          <Link to={routes.studyResources}>My Study List</Link>
+        </button>
       )}
       {appState.loggedInUser && (
         <button onClick={handleToSubmitResource}>
-          <Link to="/submit-resource">Submit Resource</Link>
+          <Link to={routes.submitResource}>Submit Resource</Link>
         </button>
       )}
     </div>
