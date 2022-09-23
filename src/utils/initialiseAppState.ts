@@ -7,18 +7,7 @@ export function initialiseAppState(): IAppState {
   };
   const nullAppState: IAppState = {
     loggedInUser: null,
-    userList: [
-      // {
-      //   userID: 1,
-      //   username: "Laura",
-      //   isFaculty: false,
-      // },
-      // {
-      //   userID: 2,
-      //   username: "Laura2",
-      //   isFaculty: false,
-      // }
-    ], //add user list
+    userList: [],
     studyResources: [],
     allResources: [],
     searchAllResources: nullSearchQuery,
