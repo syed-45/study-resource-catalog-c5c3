@@ -4,6 +4,7 @@ import { IUser } from "../utils/interfaces";
 import { getUserList } from "../utils/getUserList";
 import { Link } from "react-router-dom";
 import { routes } from "../utils/routes";
+import { Button, Dropdown, Form } from "react-bootstrap";
 
 interface LoginUserProps {
   appState: IAppState;
@@ -54,12 +55,27 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
 
   return (
     <>
-      <h1>
+      <p>
         {appState.loggedInUser
           ? "Logged in as " + appState.loggedInUser?.username
           : "You are logged out"}
-      </h1>
-      <select
+      </p>
+      <Form.Select aria-label="Default select example" className="user-dropdown" name="username"
+        id="user-dropdown"
+        onChange={handleSelect}
+        value={selectedUserId}>
+          <option value=""> Select User </option>
+          {appState.userList.map((user) => {
+          console.log("inside loop", user);
+          return (
+            <option key={user.userID} value={user.userID.toString()}>
+              {user.username}
+            </option>
+          );
+        })}
+      </Form.Select>
+
+      {/* <select
         name="username"
         id="user-dropdown"
         onChange={handleSelect}
@@ -74,12 +90,12 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
             </option>
           );
         })}
-      </select>
-      <button onClick={appState.loggedInUser ? logout : login}>
+      </select> */}
+      <Button variant="warning" onClick={appState.loggedInUser ? logout : login}>
         <Link to={routes.resources}>
           {appState.loggedInUser ? "LogOut" : "Login"}
-        </Link>
-      </button>
+        </Link> 
+      </Button>
     </>
   );
 }
