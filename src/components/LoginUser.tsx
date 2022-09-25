@@ -55,46 +55,41 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
 
   return (
     <>
-      <p>
-        {appState.loggedInUser
-          ? "Logged in as " + appState.loggedInUser?.username
-          : "You are logged out"}
-      </p>
-      <Form.Select aria-label="Default select example" className="user-dropdown" name="username"
-        id="user-dropdown"
-        onChange={handleSelect}
-        value={selectedUserId}>
+      <div>
+        <Form.Select
+          aria-label="Default select example"
+          className="user-dropdown"
+          name="username"
+          id="user-dropdown"
+          onChange={handleSelect}
+          value={selectedUserId}
+        >
           <option value=""> Select User </option>
           {appState.userList.map((user) => {
-          console.log("inside loop", user);
-          return (
-            <option key={user.userID} value={user.userID.toString()}>
-              {user.username}
-            </option>
-          );
-        })}
-      </Form.Select>
+            console.log("inside loop", user);
+            return (
+              <option key={user.userID} value={user.userID.toString()}>
+                {user.username}
+              </option>
+            );
+          })}
+        </Form.Select>
+        <p className="logged-status">
+          {appState.loggedInUser
+            ? "Logged in as " + appState.loggedInUser?.username
+            : "You are logged out"}
+        </p>
+      </div>
 
-      {/* <select
-        name="username"
-        id="user-dropdown"
-        onChange={handleSelect}
-        value={selectedUserId}
+      <Button
+        className="login-button"
+        size="lg"
+        variant="warning"
+        onClick={appState.loggedInUser ? logout : login}
       >
-        <option value=""> Select User </option>
-        {appState.userList.map((user) => {
-          console.log("inside loop", user);
-          return (
-            <option key={user.userID} value={user.userID.toString()}>
-              {user.username}
-            </option>
-          );
-        })}
-      </select> */}
-      <Button variant="warning" onClick={appState.loggedInUser ? logout : login}>
         <Link to={routes.resources}>
           {appState.loggedInUser ? "LogOut" : "Login"}
-        </Link> 
+        </Link>
       </Button>
     </>
   );
