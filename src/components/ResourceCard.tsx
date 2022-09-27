@@ -1,4 +1,4 @@
-import { Accordion, Button, Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { IAppState, IResource } from "../utils/interfaces";
 import { CommentSection } from "./CommentSection";
 

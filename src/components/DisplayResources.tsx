@@ -1,5 +1,3 @@
-import { resourceUsage } from "process";
-import { Accordion, Button, Card } from "react-bootstrap";
 import { getResources } from "../utils/getResources";
 import { IAppState } from "../utils/interfaces";
 import { ResourceCard } from "./ResourceCard";
