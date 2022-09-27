@@ -1,5 +1,7 @@
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { IAppState } from "../utils/interfaces";
-// import LoginUser from "./LoginUser";
+import { routes } from "../utils/routes";
 
 interface NavigationBarProps {
   appState: IAppState;
@@ -8,25 +10,30 @@ interface NavigationBarProps {
 export default function NavigationBar({
   appState,
 }: NavigationBarProps): JSX.Element {
-  function handleHomePage() {
-    console.log("Home Page is working");
-  }
-  function handleToStudyList() {
-    console.log("Study List is working");
-  }
-  function handleToSubmitResource() {
-    console.log("Submit Resource is working");
-  }
   return (
-    <header>
-      <h1> Welcome, {appState.loggedInUser?.username}</h1>
-      <button onClick={handleHomePage}> Home Page </button>
-      {appState.loggedInUser && (
-        <button onClick={handleToStudyList}>My Study List </button>
-      )}
-      {appState.loggedInUser && (
-        <button onClick={handleToSubmitResource}>Sumbit Resource </button>
-      )}
-    </header>
+    <div>
+      <Navbar bg="warning" variant="light">
+        <Container>
+          <Navbar.Brand href="#home">
+            Welcome, {appState.loggedInUser?.username}
+          </Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link>
+              <Link to={routes.resources}>Home</Link>
+            </Nav.Link>
+            {appState.loggedInUser && (
+              <Nav.Link>
+                <Link to={routes.studyResources}>My Study List</Link>
+              </Nav.Link>
+            )}
+            {appState.loggedInUser && (
+              <Nav.Link>
+                <Link to={routes.submitResource}>Submit Resource</Link>
+              </Nav.Link>
+            )}
+          </Nav>
+        </Container>
+      </Navbar>
+    </div>
   );
 }

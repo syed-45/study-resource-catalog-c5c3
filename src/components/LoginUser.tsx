@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { IAppState } from "../utils/interfaces";
 import { IUser } from "../utils/interfaces";
 import { getUserList } from "../utils/getUserList";
+import { Link } from "react-router-dom";
+import { routes } from "../utils/routes";
+import { Button, Dropdown, Form } from "react-bootstrap";
 
 interface LoginUserProps {
   appState: IAppState;
@@ -52,36 +55,44 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
 
   return (
     <>
-      <h1>
-        {appState.loggedInUser
-          ? "Logged in as " + appState.loggedInUser?.username
-          : "You are logged out"}
-      </h1>
-      <select
-        name="username"
-        id="user-dropdown"
-        onChange={handleSelect}
-        value={selectedUserId}
+      <div>
+        <Form.Select
+          aria-label="Default select example"
+          className="user-dropdown"
+          name="username"
+          id="user-dropdown"
+          onChange={handleSelect}
+          value={selectedUserId}
+        >
+          <option value=""> Select User </option>
+          {appState.userList.map((user) => {
+            console.log("inside loop", user);
+            return (
+              <option key={user.userID} value={user.userID.toString()}>
+                {user.username}
+              </option>
+            );
+          })}
+        </Form.Select>
+        <p className="logged-status">
+          {appState.loggedInUser
+            ? "Logged in as " + appState.loggedInUser?.username
+            : "You are logged out"}
+        </p>
+      </div>
+
+      <Button
+        className="login-button"
+        size="lg"
+        variant="warning"
+        onClick={appState.loggedInUser ? logout : login}
       >
-        <option value=""> Select User </option>
-        {appState.userList.map((user) => {
-          console.log("inside loop", user);
-          return (
-            <option key={user.userID} value={user.userID.toString()}>
-              {user.username}
-            </option>
-          );
-        })}
-      </select>
-      <button onClick={appState.loggedInUser ? logout : login}>
-        {appState.loggedInUser ? "LogOut" : "Login"}
-      </button>
+        <Link to={routes.resources}>
+          {appState.loggedInUser ? "LogOut" : "Login"}
+        </Link>
+      </Button>
     </>
   );
 }
 
 export default LoginUser;
-
-// function getUsers () {
-//     return mock JSON = users[]
-// }
