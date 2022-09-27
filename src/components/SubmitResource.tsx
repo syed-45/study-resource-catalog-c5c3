@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { IAppState, IResource } from "../utils/interfaces";
+import { getTags, getWeeks } from "../utils/getTags";
+import { IAppState, IResource, Itag, IWeek } from "../utils/interfaces";
 
 interface SubmitResourceProps {
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
-
 
 export function SubmitResource({
   appState,
@@ -22,18 +22,26 @@ export function SubmitResource({
     reccomendationText: "",
     reccomendationOptions: "",
   });
-  const [tags, setTags] = useState<string[]>()
 
-  // useEffect( () => async () => await setTags(getTags()))
+  const [tags, setTags] = useState<Itag[]>();
+  const [weeks, setWeeks] = useState<IWeek[]>();
+  //const [selectedTags, setSelectedTags] = useState<string[]>(["tag1", "tag2"]);
 
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     const listOfUsers: IUser[] = await getUserList();
-  //     console.log(listOfUsers);
-  //     setAppState((appState) => ({ ...appState, userList: listOfUsers }));
-  //   };
-  //   getUsers();
-  // }, [setAppState]);
+  useEffect(() => {
+    const getAllTags = async () => {
+      const allTags: Itag[] = await getTags();
+      console.log(allTags);
+      setTags(allTags);
+    };
+
+    const getAllWeeks = async () => {
+      const allWeeks: IWeek[] = await getWeeks();
+      console.log(allWeeks);
+      setWeeks(allWeeks);
+    };
+    getAllTags();
+    getAllWeeks();
+  }, []);
 
   return (
     <div className="submit-resource-form">
@@ -52,14 +60,26 @@ export function SubmitResource({
         value={inputs?.URL}
         onChange={(e) => setInputs({ ...inputs, URL: e.target.value })}
       ></input>
-      <div>
-        dropdwon tags...        
-      </div>
       <select>
+        <option> dropdwon tags..</option>
+        {tags?.map((tag, index) => {
+          return (
+            <option key={index} value={tag.tag_name}>
+              {" "}
+              {tag.tag_name}
+            </option>
+          );
+        })}
+        {/* </select>
+      <textarea value={selectedTags.join(" ")}></textarea>
+      <select> */}
         <option>content type</option>
       </select>
       <select>
         <option>build week</option>
+        {weeks?.map((week, index) => {
+          return <option key={index}> {week.build_week_name} </option>;
+        })}
       </select>
       <select>
         <option>recommendation status</option>
@@ -74,16 +94,14 @@ export function SubmitResource({
       <textarea
         placeholder="summary of resource"
         value={inputs?.summary}
-        onChange={(e) =>
-          setInputs({ ...inputs, summary: e.target.value })
-        }
+        onChange={(e) => setInputs({ ...inputs, summary: e.target.value })}
       ></textarea>
     </div>
   );
 
-  {
-    /* // -> user fills in form {}
-  // -> user press submit
-  // -> axios.post({appState.loggedInUser?.userID, other form stuff}) */
-  }
+  // {
+  //   /* // -> user fills in form {}
+  // // -> user press submit
+  // // -> axios.post({appState.loggedInUser?.userID, other form stuff}) */
+  // }
 }

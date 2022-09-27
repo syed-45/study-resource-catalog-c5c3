@@ -30,3 +30,9 @@ export interface ISearchQuery {
   searchTerm: string;
   tag: string[];
 }
+export interface Itag {
+  tag_name: string
+}
+export interface IWeek {
+  build_week_name: string
+}
