@@ -1,10 +1,18 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { getTags, getWeeks } from "../utils/getTags";
-import { IAppState, IResource, Itag, IWeek } from "../utils/interfaces";
+import { IAppState, IResource} from "../utils/interfaces";
 
 interface SubmitResourceProps {
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
+}
+
+export interface Itag {
+  tag_name: string
+}
+export interface IWeek {
+  build_week_name: string
 }
 
 export function SubmitResource({
@@ -23,9 +31,10 @@ export function SubmitResource({
     reccomendationOptions: "",
   });
 
-  const [tags, setTags] = useState<Itag[]>();
+  const [tags, setTags] = useState<Itag[]>([]);
   const [weeks, setWeeks] = useState<IWeek[]>();
-  //const [selectedTags, setSelectedTags] = useState<string[]>(["tag1", "tag2"]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [bgColor, setbgColor] = useState<string>('rgb(242 243 235)')
 
   useEffect(() => {
     const getAllTags = async () => {
@@ -42,6 +51,22 @@ export function SubmitResource({
     getAllTags();
     getAllWeeks();
   }, []);
+
+  const handleTagClick = async (tagName: string) => {
+    // const res = await axios.post('https://study-resource-catalog-c5c3.herokuapp.com/tags',{
+    //   tag: tagName
+    // })
+    const matchingIndex = selectedTags.indexOf(tagName)
+    if (matchingIndex===-1) {
+      setSelectedTags([...selectedTags,tagName])
+    }
+    else {       
+      const currentlySelectedTags = [...selectedTags]
+      currentlySelectedTags.splice(matchingIndex,1);
+      setSelectedTags(currentlySelectedTags)
+    }
+  }
+  
 
   return (
     <div className="submit-resource-form">
@@ -60,21 +85,25 @@ export function SubmitResource({
         value={inputs?.URL}
         onChange={(e) => setInputs({ ...inputs, URL: e.target.value })}
       ></input>
-      <select>
-        <option> dropdwon tags..</option>
-        {tags?.map((tag, index) => {
+      {/* <select>
+        <option> dropdwon tags..</option> */}
+        {/* {tags?.map((tag, index) => {
           return (
             <option key={index} value={tag.tag_name}>
               {" "}
               {tag.tag_name}
             </option>
           );
-        })}
-        {/* </select>
-      <textarea value={selectedTags.join(" ")}></textarea>
-      <select> */}
-        <option>content type</option>
-      </select>
+        })} */}            
+        {/* <option>content type</option> */}
+        <div className="tags-cloud">
+          {          
+          tags.map((tag:Itag, index):JSX.Element=>{
+            return(              
+              <button style={{backgroundColor:selectedTags.includes(tag.tag_name) ?  'lightgreen' : 'rgb(242 243 235)'}}onClick={()=>handleTagClick(tag.tag_name)}key={index}>{tag.tag_name}</button>
+            )
+          })}
+          </div>
       <select>
         <option>build week</option>
         {weeks?.map((week, index) => {

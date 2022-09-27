@@ -19,3 +19,14 @@
 .submit-resource-form > textarea {
   min-height: 300px;
 }
+
+.tags-cloud {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 5%;
+  height: 200px;
+}
+
+.tags-cloud > button {
+  width: 20%;
+}
