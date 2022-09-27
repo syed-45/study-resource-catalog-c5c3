@@ -26,6 +26,22 @@ export interface IResource {
   reccomendationOptions: string;
 }
 
+/*
+  CREATE TABLE comment_inputs (
+    comment_id SERIAL PRIMARY KEY,
+    user_id integer references users(user_id),
+    message text,
+    time_stamp timestamp default NOW()
+   );
+
+*/
+export interface IComment {
+  commentID: number;
+  userID: userID;
+  message: string;
+  timestamp: string;
+}
+
 export interface ISearchQuery {
   searchTerm: string;
   tag: string[];

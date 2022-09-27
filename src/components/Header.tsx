@@ -1,6 +1,5 @@
 import { IAppState } from "../utils/interfaces";
 import "bootstrap/dist/css/bootstrap.css";
-import Logo from "../images/logonav.jpg";
 import LoginUser from "./LoginUser";
 import NavigationBar from "./NavigationBar";
 import Container from "react-bootstrap/Container";
@@ -14,7 +13,7 @@ interface HeaderProps {
 export function Header({ appState, setAppState }: HeaderProps): JSX.Element {
   return (
     <header>
-      <Navbar  bg="success">
+      <Navbar bg="success">
         <Container>
           <Navbar.Brand className="app-navbar">
             {/* <img

@@ -4,7 +4,7 @@ import { IUser } from "../utils/interfaces";
 import { getUserList } from "../utils/getUserList";
 import { Link } from "react-router-dom";
 import { routes } from "../utils/routes";
-import { Button, Dropdown, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 interface LoginUserProps {
   appState: IAppState;
