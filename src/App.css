@@ -1,6 +1,21 @@
 .logged-status {
   margin: 10px;
 }
-.user-dropdown{
-    margin: 10px
+.user-dropdown {
+  margin: 10px;
+}
+
+.submit-resource-form {
+  display: flex;
+  flex-flow: column;
+  width: 500px;
+}
+
+.submit-resource-form > * {
+  width: 100%;
+  height: 50px;
+}
+
+.submit-resource-form > textarea {
+  min-height: 300px;
 }
