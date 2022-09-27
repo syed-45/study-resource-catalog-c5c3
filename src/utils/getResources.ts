@@ -13,30 +13,30 @@ import { IResource } from "./interfaces";
 //   );
 
 export function getResources(): IResource[] {
-    const mockResources: IResource[] = [
-        {
-            resourceID: 1,
-            submitter: 1,
-            title: "CSS",
-            author: "Neill",
-            URL: "udemy.com",
-            timestamp: "2022-09-06 10:52:50.456749",
-            summary: "This is a summary",
-            reccomendationText: "This is a reccomendation Text",
-            reccomendationOptions: "I recommend !",
-        },
-        {
-            resourceID: 2,
-            submitter: 2,
-            title: "HTML 5",
-            author: "Sevgi",
-            URL: "udemy.com",
-            timestamp: "2022-09-06 10:52:50.456749",
-            summary: "This is a summary",
-            reccomendationText: "This is a reccomendation Text",
-            reccomendationOptions: "I recommend !",
-        }
-    ]
+  const mockResources: IResource[] = [
+    {
+      resourceID: 1,
+      submitter: 1,
+      title: "CSS",
+      author: "Neill",
+      URL: "udemy.com",
+      timestamp: "2022-09-06 10:52:50.456749",
+      summary: "This is a summary",
+      reccomendationText: "This is a reccomendation Text",
+      reccomendationOptions: "I recommend !",
+    },
+    {
+      resourceID: 2,
+      submitter: 2,
+      title: "HTML 5",
+      author: "Sevgi",
+      URL: "udemy.com",
+      timestamp: "2022-09-06 10:52:50.456749",
+      summary: "This is a summary",
+      reccomendationText: "This is a reccomendation Text",
+      reccomendationOptions: "I recommend !",
+    },
+  ];
 
-    return mockResources
+  return mockResources;
 }

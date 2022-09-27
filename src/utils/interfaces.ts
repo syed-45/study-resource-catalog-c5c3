@@ -42,7 +42,6 @@ export interface IComment {
   timestamp: string;
 }
 
-
 export interface ISearchQuery {
   searchTerm: string;
   tag: string[];
