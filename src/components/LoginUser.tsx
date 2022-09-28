@@ -86,6 +86,7 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
         size="lg"
         variant="warning"
         onClick={appState.loggedInUser ? logout : login}
+        data-test="login-button"
       >
         <Link to={routes.resources}>
           {appState.loggedInUser ? "LogOut" : "Login"}
