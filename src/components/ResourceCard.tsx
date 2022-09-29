@@ -42,7 +42,6 @@ export function ResourceCard({
     // setPreferences(getLikes(resource.resourceID));
   };
 
-
   return (
     <Card
       key={resource.resourceID}
@@ -53,8 +52,9 @@ export function ResourceCard({
         <div className="card-title">
           {resource.title}
           <Card.Subtitle className="mb-2 text-muted">
-            by {resource.author}<br/>
-            {formatTimestamp(resource.timestamp)} 
+            by {resource.author}
+            <br />
+            {formatTimestamp(resource.timestamp)}
           </Card.Subtitle>
         </div>
         <div className="like-buttons">
