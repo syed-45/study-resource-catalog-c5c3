@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Container } from "react-bootstrap";
 import "../SubmitResource.css";
 import { useEffect, useState } from "react";
 import {
@@ -9,7 +10,7 @@ import {
 } from "../utils/getStaticData";
 import { IAppState, IResource } from "../utils/interfaces";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { initialInputs } from "../utils/initialiseInputs";
 
 interface SubmitResourceProps {
@@ -65,13 +66,11 @@ export function SubmitResource({
     }
     const getAllTags = async () => {
       const allTags: Itag[] = await getTags();
-      console.log(allTags);
       setTags(allTags);
     };
 
     const getAllWeeks = async () => {
       const allWeeks: IWeek[] = await getWeeks();
-      console.log(allWeeks);
       setWeeks(allWeeks);
     };
 
@@ -103,6 +102,30 @@ export function SubmitResource({
   };
 
   async function handleSubmitResource() {
+    if (inputs.title.length === 0) {
+      toast.warning("Please insert the title");
+      return;
+    }
+    if (inputs.URL.length === 0) {
+      toast.warning("Please insert the link");
+      return;
+    }
+    if (selectedContentType.content_type.length === 0) {
+      toast.warning("You need to select a content type");
+      return;
+    }
+    if (selectedTags.length === 0) {
+      toast.warning("You need to select at least one tag");
+      return;
+    }
+    if (selectedWeek.build_week_name.length === 0) {
+      toast.warning("You need to select a study week");
+      return;
+    }
+    if (inputs.reccomendationOptions.length === 0) {
+      toast.warning("You need to select a recommendation field");
+      return;
+    }
     const data: IResource = {
       resourceID: 0,
       submitter: inputs.submitter,
@@ -160,46 +183,48 @@ export function SubmitResource({
   }
 
   return (
-    <div>
-      <ToastContainer />
-      <div className="submit-resource-form">
+    <Container>
+      <div className="submit-resource-form text-center">
         <input
+          className="form-control"
           placeholder="Resource title"
           value={inputs?.title}
           onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
         ></input>
         <input
+          className="form-control"
           placeholder="Author Name"
           value={inputs?.author}
           onChange={(e) => setInputs({ ...inputs, author: e.target.value })}
         ></input>
         <input
+          className="form-control"
           placeholder="Link"
           value={inputs?.URL}
           onChange={(e) => setInputs({ ...inputs, URL: e.target.value })}
         ></input>
         <select
+          className="form-control"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             setSelectedContentType({
               content_type: e.target.value,
             })
           }
         >
-          <option disabled hidden>
-            content type
-          </option>
+          <option hidden>content type</option>
           {contentTypes.map((contentType, index) => {
             return <option key={index}> {contentType.content_type}</option>;
           })}
         </select>
-        <div className="tags-cloud">
+        <div className="tags-cloud text-center">
           {tags.map((tag: Itag, index): JSX.Element => {
             return (
               <button
+                className="buttonTag"
                 style={{
                   backgroundColor: selectedTags.includes(tag.tag_name)
-                    ? "lightgreen"
-                    : "rgb(242 243 235)",
+                    ? "rgb(0, 145, 0)"
+                    : "white",
                 }}
                 onClick={() => handleTagClick(tag.tag_name)}
                 key={index}
@@ -210,23 +235,21 @@ export function SubmitResource({
           })}
         </div>
         <select
+          className="form-control"
           onChange={(e) => setSelectedWeek({ build_week_name: e.target.value })}
         >
-          <option disabled hidden>
-            build week
-          </option>
+          <option hidden>build week</option>
           {weeks?.map((week, index) => {
             return <option key={index}> {week.build_week_name} </option>;
           })}
         </select>
         <select
+          className="form-control"
           onChange={(e) =>
             setInputs({ ...inputs, reccomendationOptions: e.target.value })
           }
         >
-          <option disabled hidden>
-            recommendation status
-          </option>
+          <option hidden>recommendation status</option>
           {recommendations.map((recommendation, index) => {
             return (
               <option key={index}>
@@ -237,6 +260,7 @@ export function SubmitResource({
           })}
         </select>
         <input
+          className="form-control"
           placeholder="Why you would recommend this..."
           value={inputs?.reccomendationText}
           onChange={(e) =>
@@ -244,14 +268,19 @@ export function SubmitResource({
           }
         ></input>
         <textarea
+          className="form-control"
           placeholder="summary of resource"
           value={inputs?.summary}
           onChange={(e) => setInputs({ ...inputs, summary: e.target.value })}
         ></textarea>
-        <button type="submit" onClick={handleSubmitResource}>
+        <button
+          className="btn btn-success"
+          type="submit"
+          onClick={handleSubmitResource}
+        >
           Submit
         </button>
       </div>
-    </div>
+    </Container>
   );
 }
