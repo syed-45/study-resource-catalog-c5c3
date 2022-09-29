@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/esm/Accordion";
-import { setSyntheticLeadingComments } from "typescript";
 import { formatTimestamp } from "../utils/formatTimestamp";
 import { getComments } from "../utils/getComments";
 import { IAppState, IComment, IResource } from "../utils/interfaces";
