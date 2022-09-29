@@ -4,3 +4,19 @@
 .user-dropdown {
   margin: 10px;
 }
+
+.display-resources {
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.add-comment-input:focus,
+.add-comment-input:active,
+.add-comment-input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
