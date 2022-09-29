@@ -51,7 +51,8 @@ export function ResourceCard({
         <div className="card-title">
           {resource.title}
           <Card.Subtitle className="mb-2 text-muted">
-            by {resource.author}
+            by {resource.author}<br/>
+            {resource.timestamp} 
           </Card.Subtitle>
         </div>
         <div className="like-buttons">

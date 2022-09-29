@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { getResources } from "../utils/getResources";
-import { IAppState } from "../utils/interfaces";
+import { IAppState, IResource } from "../utils/interfaces";
 import { ResourceCard } from "./ResourceCard";
 
 interface DisplayResourcesProps {
@@ -11,9 +12,14 @@ export function DisplayResources({
   appState,
   setAppState,
 }: DisplayResourcesProps): JSX.Element {
+  useEffect(() => {
+    getResources().then((allResources) =>
+      setAppState((prev) => ({ ...prev, allResources: allResources }))
+    );
+  }, []);
   return (
     <section className="display-resources">
-      {getResources().map((resource) => (
+      {appState.allResources.map((resource) => (
         <ResourceCard
           key={resource.resourceID}
           resource={resource}
