@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Container } from "react-bootstrap";
 import "../SubmitResource.css";
 import { useEffect, useState } from "react";
 import {
@@ -182,25 +183,28 @@ export function SubmitResource({
   }
 
   return (
-    <div>
-      <ToastContainer />
-      <div className="submit-resource-form">
+    <Container>
+      <div className="submit-resource-form text-center">
         <input
+          className="form-control"
           placeholder="Resource title"
           value={inputs?.title}
           onChange={(e) => setInputs({ ...inputs, title: e.target.value })}
         ></input>
         <input
+          className="form-control"
           placeholder="Author Name"
           value={inputs?.author}
           onChange={(e) => setInputs({ ...inputs, author: e.target.value })}
         ></input>
         <input
+          className="form-control"
           placeholder="Link"
           value={inputs?.URL}
           onChange={(e) => setInputs({ ...inputs, URL: e.target.value })}
         ></input>
         <select
+          className="form-control"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             setSelectedContentType({
               content_type: e.target.value,
@@ -212,14 +216,15 @@ export function SubmitResource({
             return <option key={index}> {contentType.content_type}</option>;
           })}
         </select>
-        <div className="tags-cloud">
+        <div className="tags-cloud text-center">
           {tags.map((tag: Itag, index): JSX.Element => {
             return (
               <button
+                className="buttonTag"
                 style={{
                   backgroundColor: selectedTags.includes(tag.tag_name)
-                    ? "lightgreen"
-                    : "rgb(242 243 235)",
+                    ? "rgb(0, 145, 0)"
+                    : "white",
                 }}
                 onClick={() => handleTagClick(tag.tag_name)}
                 key={index}
@@ -230,6 +235,7 @@ export function SubmitResource({
           })}
         </div>
         <select
+          className="form-control"
           onChange={(e) => setSelectedWeek({ build_week_name: e.target.value })}
         >
           <option hidden>build week</option>
@@ -238,6 +244,7 @@ export function SubmitResource({
           })}
         </select>
         <select
+          className="form-control"
           onChange={(e) =>
             setInputs({ ...inputs, reccomendationOptions: e.target.value })
           }
@@ -253,6 +260,7 @@ export function SubmitResource({
           })}
         </select>
         <input
+          className="form-control"
           placeholder="Why you would recommend this..."
           value={inputs?.reccomendationText}
           onChange={(e) =>
@@ -260,14 +268,19 @@ export function SubmitResource({
           }
         ></input>
         <textarea
+          className="form-control"
           placeholder="summary of resource"
           value={inputs?.summary}
           onChange={(e) => setInputs({ ...inputs, summary: e.target.value })}
         ></textarea>
-        <button type="submit" onClick={handleSubmitResource}>
+        <button
+          className="btn btn-success"
+          type="submit"
+          onClick={handleSubmitResource}
+        >
           Submit
         </button>
       </div>
-    </div>
+    </Container>
   );
 }
