@@ -8,14 +8,14 @@ import { ResourceID } from "./interfaces";
  * @returns
  */
 export interface IPreferences {
-    likes: number;
-    dislikes: number;
+  likes: number;
+  dislikes: number;
 }
 
 export function getLikes(resourceID: ResourceID): IPreferences {
-    const likes = {
-        likes: 109,
-        dislikes: 40
-    }
-    return likes;
+  const likes = {
+    likes: 109,
+    dislikes: 40,
+  };
+  return likes;
 }

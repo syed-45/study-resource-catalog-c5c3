@@ -14,7 +14,7 @@ export interface IUser {
   isFaculty: boolean;
 }
 
-export type Preference = 'like' | 'dislike'
+export type Preference = "like" | "dislike";
 export type ResourceID = number;
 export interface IResource {
   resourceID: ResourceID;
@@ -42,6 +42,6 @@ export interface ISearchQuery {
 
 export interface ILike {
   userID: userID;
-  resourceID: ResourceID
+  resourceID: ResourceID;
   preferences: Preference;
 }

@@ -20,7 +20,6 @@
   width: 100%;
 }
 
-
 .show-less {
   display: -webkit-box;
   -webkit-line-clamp: 5;
@@ -41,4 +40,3 @@
   margin: 0.25rem 0.25rem;
   width: 6rem;
 }
-

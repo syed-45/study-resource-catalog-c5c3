@@ -9,10 +9,13 @@ import { Preference, ResourceID } from "./interfaces";
  * @returns
  */
 
-export function submitLike(resourceID: ResourceID, preference: Preference): IPreferences {
-    const likes = {
-        likes: 109,
-        dislikes: 40
-    }
-    return likes;
+export function submitLike(
+  resourceID: ResourceID,
+  preference: Preference
+): IPreferences {
+  const likes = {
+    likes: 109,
+    dislikes: 40,
+  };
+  return likes;
 }
