@@ -23,24 +23,24 @@ export function CommentSection({
   }, [setComments]);
   return (
     <>
-    <Accordion>
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>view comments</Accordion.Header>
-        <Accordion.Body>
-          <AddComment resource={resource} appState={appState} />
-          {comments.map((comment) => (
-            <Card key={comment.commentID} className="comment-card">
-              <Card.Body>
-                <Card.Text>{comment.message}</Card.Text>
-              </Card.Body>
-              <Card.Footer className="text-muted small">
-                {formatTimestamp(comment.timestamp)}
-              </Card.Footer>
-            </Card>
-          ))}
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>view comments</Accordion.Header>
+          <Accordion.Body>
+            <AddComment resource={resource} appState={appState} />
+            {comments.map((comment) => (
+              <Card key={comment.commentID} className="comment-card">
+                <Card.Body>
+                  <Card.Text>{comment.message}</Card.Text>
+                </Card.Body>
+                <Card.Footer className="text-muted small">
+                  {formatTimestamp(comment.timestamp)}
+                </Card.Footer>
+              </Card>
+            ))}
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </>
   );
 }
