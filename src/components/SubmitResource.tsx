@@ -65,13 +65,11 @@ export function SubmitResource({
     }
     const getAllTags = async () => {
       const allTags: Itag[] = await getTags();
-      console.log(allTags);
       setTags(allTags);
     };
 
     const getAllWeeks = async () => {
       const allWeeks: IWeek[] = await getWeeks();
-      console.log(allWeeks);
       setWeeks(allWeeks);
     };
 
@@ -103,6 +101,30 @@ export function SubmitResource({
   };
 
   async function handleSubmitResource() {
+    if (inputs.title.length === 0) {
+      toast.warning("Please insert the title");
+      return;
+    }
+    if (inputs.URL.length === 0) {
+      toast.warning("Please insert the link");
+      return;
+    }
+    if (selectedContentType.content_type.length === 0) {
+      toast.warning("You need to select a content type");
+      return;
+    }
+    if (selectedTags.length === 0) {
+      toast.warning("You need to select at least one tag");
+      return;
+    }
+    if (selectedWeek.build_week_name.length === 0) {
+      toast.warning("You need to select a study week");
+      return;
+    }
+    if (inputs.reccomendationOptions.length === 0) {
+      toast.warning("You need to select a recommendation field");
+      return;
+    }
     const data: IResource = {
       resourceID: 0,
       submitter: inputs.submitter,
@@ -116,14 +138,14 @@ export function SubmitResource({
     };
 
     const response = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/resources", //change to heroku
+      "http://localhost:4000/resources", //change to heroku
       data
     );
 
     const resourceData: IResource = response.data;
 
     const contentTypeResponse = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/tablename/content_types_resource",
+      "http://localhost:4000/tablename/content_types_resource",
       {
         content_type: selectedContentType.content_type,
         resource_id: resourceData.resourceID,
@@ -135,7 +157,7 @@ export function SubmitResource({
     }
 
     const tagDataResponse = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/tablename/tag_resource",
+      "http://localhost:4000/tablename/tag_resource",
       {
         tag_name: selectedTags,
         resource_id: resourceData.resourceID,
@@ -146,7 +168,7 @@ export function SubmitResource({
     }
 
     const weekData = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/tablename/buildweek_resource",
+      "http://localhost:4000/tablename/buildweek_resource",
       {
         build_week_name: selectedWeek.build_week_name,
         resource_id: resourceData.resourceID,
@@ -185,9 +207,7 @@ export function SubmitResource({
             })
           }
         >
-          <option disabled hidden>
-            content type
-          </option>
+          <option hidden>content type</option>
           {contentTypes.map((contentType, index) => {
             return <option key={index}> {contentType.content_type}</option>;
           })}
@@ -212,9 +232,7 @@ export function SubmitResource({
         <select
           onChange={(e) => setSelectedWeek({ build_week_name: e.target.value })}
         >
-          <option disabled hidden>
-            build week
-          </option>
+          <option hidden>build week</option>
           {weeks?.map((week, index) => {
             return <option key={index}> {week.build_week_name} </option>;
           })}
@@ -224,9 +242,7 @@ export function SubmitResource({
             setInputs({ ...inputs, reccomendationOptions: e.target.value })
           }
         >
-          <option disabled hidden>
-            recommendation status
-          </option>
+          <option hidden>recommendation status</option>
           {recommendations.map((recommendation, index) => {
             return (
               <option key={index}>
