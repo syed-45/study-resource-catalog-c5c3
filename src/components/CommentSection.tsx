@@ -1,5 +1,6 @@
 import { Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/esm/Accordion";
+import { formatTimestamp } from "../utils/formatTimestamp";
 import { getComments } from "../utils/getComments";
 import { IAppState, IResource } from "../utils/interfaces";
 import { AddComment } from "./AddComment";
@@ -26,7 +27,7 @@ export function CommentSection({
                 <Card.Text>{comment.message}</Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted small">
-                {comment.timestamp}
+                {formatTimestamp(comment.timestamp)}
               </Card.Footer>
             </Card>
           ))}
