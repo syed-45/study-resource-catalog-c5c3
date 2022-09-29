@@ -8,6 +8,8 @@ import {
 } from "../utils/getStaticData";
 import { IAppState, IResource } from "../utils/interfaces";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { initialInputs } from "../utils/initialiseInputs";
 
 interface SubmitResourceProps {
   appState: IAppState;
@@ -32,24 +34,25 @@ export function SubmitResource({
   setAppState,
 }: SubmitResourceProps): JSX.Element {
   const [inputs, setInputs] = useState<IResource>({
-    resourceID: 0,
+    ...initialInputs,
     submitter: appState.loggedInUser?.userID || 0,
-    title: "",
-    author: "",
-    URL: "",
-    timestamp: "",
-    summary: "",
-    reccomendationText: "",
-    reccomendationOptions: "",
   });
 
   const [tags, setTags] = useState<Itag[]>([]);
   const [weeks, setWeeks] = useState<IWeek[]>([]);
+  const [contentTypes, setContentTypes] = useState<IContentType[]>([]);
   const [recommendations, setRecommendations] = useState<
     IRecommendationOption[]
   >([]);
-  const [contentTypes, setContentTypes] = useState<IContentType[]>([]);
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedWeek, setSelectedWeek] = useState<IWeek>({
+    build_week_name: "",
+  });
+  const [selectedContentType, setSelectedContentType] = useState<IContentType>({
+    content_type: "",
+  });
+
   /*
   useNavigate prevents accessing Submit resource Page, when user is not logged in
   */
@@ -88,9 +91,6 @@ export function SubmitResource({
   }, [appState.loggedInUser, navigate]);
 
   const handleTagClick = async (tagName: string) => {
-    // const res = await axios.post('https://study-resource-catalog-c5c3.herokuapp.com/tags',{
-    //   tag_name: tagName
-    // })
     const matchingIndex = selectedTags.indexOf(tagName);
     if (matchingIndex === -1) {
       setSelectedTags([...selectedTags, tagName]);
@@ -101,12 +101,7 @@ export function SubmitResource({
     }
   };
 
-  const handleReccomendation = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setInputs({ ...inputs, reccomendationOptions: e.target.value });
-  };
-
-  async function handleSubmitResource(e: React.FormEvent) {
-    // e.preventDefault();
+  async function handleSubmitResource() {
     const data: IResource = {
       resourceID: 0,
       submitter: inputs.submitter,
@@ -119,15 +114,53 @@ export function SubmitResource({
       reccomendationOptions: inputs.reccomendationOptions,
     };
 
-    const resourceData = await axios.post(
+    const response = await axios.post(
       "http://localhost:4000/resources", //change to heroku
       data
     );
-    console.log(resourceData); //to delete
+
+    const resourceData: IResource = response.data;
+
+    const contentTypeResponse = await axios.post(
+      "http://localhost:4000/tablename/content_types_resource",
+      {
+        content_type: selectedContentType.content_type,
+        resource_id: resourceData.resourceID,
+      }
+    );
+
+    if (contentTypeResponse.status !== 200) {
+      toast.warn("Failed to submit content type");
+    }
+
+    const tagDataResponse = await axios.post(
+      "http://localhost:4000/tablename/tag_resource",
+      {
+        tag_name: selectedTags,
+        resource_id: resourceData.resourceID,
+      }
+    );
+    if (tagDataResponse.status !== 200) {
+      toast.warn("Failed to submit tags");
+    }
+
+    const weekData = await axios.post(
+      "http://localhost:4000/tablename/buildweek_resource",
+      {
+        build_week_name: selectedWeek.build_week_name,
+        resource_id: resourceData.resourceID,
+      }
+    );
+
+    if (weekData.status === 200) {
+      toast.success("Rescource submitted successfully!");
+    }
+    navigate("/");
   }
 
   return (
     <div>
+      <ToastContainer />
       <div className="submit-resource-form">
         <input
           placeholder="Resource title"
@@ -144,8 +177,14 @@ export function SubmitResource({
           value={inputs?.URL}
           onChange={(e) => setInputs({ ...inputs, URL: e.target.value })}
         ></input>
-        <select>
-          <option disabled selected hidden>
+        <select
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            setSelectedContentType({
+              content_type: e.target.value,
+            })
+          }
+        >
+          <option disabled hidden>
             content type
           </option>
           {contentTypes.map((contentType, index) => {
@@ -169,16 +208,22 @@ export function SubmitResource({
             );
           })}
         </div>
-        <select>
-          <option disabled selected hidden>
+        <select
+          onChange={(e) => setSelectedWeek({ build_week_name: e.target.value })}
+        >
+          <option disabled hidden>
             build week
           </option>
           {weeks?.map((week, index) => {
             return <option key={index}> {week.build_week_name} </option>;
           })}
         </select>
-        <select onChange={handleReccomendation}>
-          <option disabled selected hidden>
+        <select
+          onChange={(e) =>
+            setInputs({ ...inputs, reccomendationOptions: e.target.value })
+          }
+        >
+          <option disabled hidden>
             recommendation status
           </option>
           {recommendations.map((recommendation, index) => {
