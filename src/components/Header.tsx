@@ -14,7 +14,7 @@ interface HeaderProps {
 export function Header({ appState, setAppState }: HeaderProps): JSX.Element {
   return (
     <header>
-      <Navbar  bg="success">
+      <Navbar bg="success">
         <Container>
           <Navbar.Brand className="app-navbar">
             {/* <img
