@@ -9,6 +9,7 @@ import {
 import { IAppState, IResource } from "../utils/interfaces";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { initialInputs } from "../utils/initialiseInputs";
 
 interface SubmitResourceProps {
   appState: IAppState;
@@ -32,18 +33,10 @@ export function SubmitResource({
   appState,
   setAppState,
 }: SubmitResourceProps): JSX.Element {
-  const initialInputs: IResource = {
-    resourceID: 0,
+  const [inputs, setInputs] = useState<IResource>({
+    ...initialInputs,
     submitter: appState.loggedInUser?.userID || 0,
-    title: "",
-    author: "",
-    URL: "",
-    timestamp: "",
-    summary: "",
-    reccomendationText: "",
-    reccomendationOptions: "",
-  };
-  const [inputs, setInputs] = useState<IResource>(initialInputs);
+  });
 
   const [tags, setTags] = useState<Itag[]>([]);
   const [weeks, setWeeks] = useState<IWeek[]>([]);
@@ -191,7 +184,7 @@ export function SubmitResource({
             })
           }
         >
-          <option disabled selected hidden>
+          <option disabled hidden>
             content type
           </option>
           {contentTypes.map((contentType, index) => {
@@ -218,7 +211,7 @@ export function SubmitResource({
         <select
           onChange={(e) => setSelectedWeek({ build_week_name: e.target.value })}
         >
-          <option disabled selected hidden>
+          <option disabled hidden>
             build week
           </option>
           {weeks?.map((week, index) => {
@@ -230,7 +223,7 @@ export function SubmitResource({
             setInputs({ ...inputs, reccomendationOptions: e.target.value })
           }
         >
-          <option disabled selected hidden>
+          <option disabled hidden>
             recommendation status
           </option>
           {recommendations.map((recommendation, index) => {
