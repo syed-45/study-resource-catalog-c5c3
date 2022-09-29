@@ -1,6 +1,7 @@
 import { Button, Card } from "react-bootstrap";
 import { IAppState, IResource } from "../utils/interfaces";
 import { CommentSection } from "./CommentSection";
+import { useState } from "react";
 
 interface ResourceCardProps {
   appState: IAppState;
@@ -11,6 +12,7 @@ export function ResourceCard({
   resource,
   appState,
 }: ResourceCardProps): JSX.Element {
+  const [showLess, setShowLess] = useState(true);
   return (
     <Card
       key={resource.resourceID}
@@ -26,8 +28,12 @@ export function ResourceCard({
         <Button variant="outline-danger">👎🏽</Button>
       </Card.Header>
       <Card.Body>
-        <Card.Text>{resource.summary}</Card.Text>
-        <Button variant="light">show more</Button>
+        <Card.Text className={showLess ? "show-less" : ""}>
+          {resource.summary}
+        </Card.Text>
+        <Button variant="light" onClick={() => setShowLess(!showLess)}>
+          {`show ${showLess ? "more" : "less"}`}
+        </Button>
       </Card.Body>
       <CommentSection resource={resource} appState={appState} />
     </Card>
