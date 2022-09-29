@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { IAppState, IResource } from "../utils/interfaces";
+import { getLikes, IPreferences } from "../utils/getLikes";
+import { IAppState, IResource, Preference } from "../utils/interfaces";
 import { CommentSection } from "./CommentSection";
-import { useState } from "react";
 
 interface ResourceCardProps {
   appState: IAppState;
@@ -13,19 +14,62 @@ export function ResourceCard({
   appState,
 }: ResourceCardProps): JSX.Element {
   const [showLess, setShowLess] = useState(true);
+  const [preferences, setPreferences] = useState<IPreferences>({
+    likes: 0,
+    dislikes: 0,
+  });
+
+  useEffect(() => {
+    setPreferences(getLikes(resource.resourceID));
+  }, [resource.resourceID]);
+
+  const handlePreference = (preference: Preference) => {
+    /*
+    update the like buttons for immediate feedback
+    make post request for preference
+    get likes again to get source of truth
+    */
+
+    if (preference === "like") {
+      setPreferences({ ...preferences, likes: preferences.likes + 1 });
+    } else {
+      setPreferences({ ...preferences, dislikes: preferences.dislikes + 1 });
+    }
+
+    // API requests
+    // submitLike(resource.resourceID, preference);
+    // setPreferences(getLikes(resource.resourceID));
+  };
+
   return (
     <Card
       key={resource.resourceID}
       style={{ minWidth: "18rem" }}
       border="success"
     >
-      <Card.Header>
-        {resource.title}
-        <Card.Subtitle className="mb-2 text-muted">
-          by {resource.author}
-        </Card.Subtitle>
-        <Button variant="outline-success">👍🏽</Button>
-        <Button variant="outline-danger">👎🏽</Button>
+      <Card.Header className="resource-card-header">
+        <div className="card-title">
+          {resource.title}
+          <Card.Subtitle className="mb-2 text-muted">
+            by {resource.author}
+          </Card.Subtitle>
+        </div>
+        <div className="like-buttons">
+          <Button
+            variant="outline-success"
+            onClick={() => handlePreference("like")}
+            disabled={appState.loggedInUser === null}
+          >
+            👍🏽 {preferences.likes}
+          </Button>
+          <Button
+            variant="outline-danger"
+            onClick={() => handlePreference("dislike")}
+            disabled={appState.loggedInUser === null}
+          >
+            👎 {preferences.dislikes}
+          </Button>
+        </div>
       </Card.Header>
       <Card.Body>
         <Card.Text className={showLess ? "show-less" : ""}>

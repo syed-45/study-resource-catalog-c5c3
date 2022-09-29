@@ -26,3 +26,17 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.resource-card-header {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
+.like-buttons {
+  text-align: right;
+}
+
+.like-buttons * {
+  margin: 0.25rem 0.25rem;
+  width: 6rem;
+}

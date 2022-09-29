@@ -14,8 +14,10 @@ export interface IUser {
   isFaculty: boolean;
 }
 
+export type Preference = 'like' | 'dislike'
+export type ResourceID = number;
 export interface IResource {
-  resourceID: number;
+  resourceID: ResourceID;
   submitter: userID;
   title: string;
   author: string;
@@ -26,15 +28,6 @@ export interface IResource {
   reccomendationOptions: string;
 }
 
-/*
-  CREATE TABLE comment_inputs (
-    comment_id SERIAL PRIMARY KEY,
-    user_id integer references users(user_id),
-    message text,
-    time_stamp timestamp default NOW()
-   );
-
-*/
 export interface IComment {
   commentID: number;
   userID: userID;
@@ -45,4 +38,10 @@ export interface IComment {
 export interface ISearchQuery {
   searchTerm: string;
   tag: string[];
+}
+
+export interface ILike {
+  userID: userID;
+  resourceID: ResourceID
+  preferences: Preference;
 }
