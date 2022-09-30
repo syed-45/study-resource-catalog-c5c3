@@ -14,6 +14,7 @@ export interface IUser {
   isFaculty: boolean;
 }
 
+export const BASEURL = "https://study-resource-catalog-c5c3.herokuapp.com";
 export type Preference = "like" | "dislike";
 export type ResourceID = number;
 export interface IResource {

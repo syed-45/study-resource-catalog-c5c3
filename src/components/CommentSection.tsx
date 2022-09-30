@@ -26,7 +26,12 @@ export function CommentSection({
         <Accordion.Item eventKey="0">
           <Accordion.Header>view comments</Accordion.Header>
           <Accordion.Body>
-            <AddComment resource={resource} appState={appState} />
+            <AddComment
+              resource={resource}
+              appState={appState}
+              setComments={setComments}
+              disabled={appState.loggedInUser === null}
+            />
             {comments.map((comment) => (
               <Card key={comment.commentID} className="comment-card">
                 <Card.Body>
