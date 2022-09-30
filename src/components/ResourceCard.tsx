@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { getLikes, IPreferences } from "../utils/getLikes";
+import { getPreferences, IPreferences } from "../utils/getPreferences";
 import { IAppState, IResource, Preference } from "../utils/interfaces";
 import { CommentSection } from "./CommentSection";
 import { formatTimestamp } from "../utils/formatTimestamp";
+import { submitPreferences } from "../utils/submitLike";
 
 interface ResourceCardProps {
   appState: IAppState;
@@ -21,7 +22,7 @@ export function ResourceCard({
   });
 
   useEffect(() => {
-    setPreferences(getLikes(resource.resourceID));
+    getPreferences(resource.resourceID).then((prefs) => setPreferences(prefs));
   }, [resource.resourceID]);
 
   const handlePreference = (preference: Preference) => {
@@ -38,8 +39,18 @@ export function ResourceCard({
     }
 
     // API requests
-    // submitLike(resource.resourceID, preference);
-    // setPreferences(getLikes(resource.resourceID));
+    if (appState.loggedInUser) {
+      submitPreferences(
+        resource.resourceID,
+        appState.loggedInUser.userID,
+        preference
+      ).then(() => {
+        getPreferences(resource.resourceID).then((prefs) => {
+          console.log(prefs);
+          setPreferences(prefs);
+        });
+      });
+    }
   };
 
   return (

@@ -1,21 +1,15 @@
-import { IPreferences } from "./getLikes";
-import { Preference, ResourceID } from "./interfaces";
+import axios from "axios";
+import { BASEURL, Preference, ResourceID, userID } from "./interfaces";
 
-// TODO missing resourceID against a commment
-/**
- * get comments given a resource order by timestamp DESC
- * @params resource: IResource
- *
- * @returns
- */
-
-export function submitLike(
+export async function submitPreferences(
   resourceID: ResourceID,
+  userID: userID,
   preference: Preference
-): IPreferences {
-  const likes = {
-    likes: 109,
-    dislikes: 40,
-  };
-  return likes;
+): Promise<void> {
+  const url = `${BASEURL}/resources/preferences`;
+  await axios.post(url, {
+    user_id: userID,
+    resource_id: resourceID,
+    preferences: preference,
+  });
 }
