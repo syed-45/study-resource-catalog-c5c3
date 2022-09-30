@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { getResources } from "../utils/getResources";
-import { IAppState, IResource } from "../utils/interfaces";
+import { IAppState } from "../utils/interfaces";
 import { ResourceCard } from "./ResourceCard";
 
 interface DisplayResourcesProps {
@@ -16,7 +16,7 @@ export function DisplayResources({
     getResources().then((allResources) =>
       setAppState((prev) => ({ ...prev, allResources: allResources }))
     );
-  }, []);
+  }, [setAppState]);
   return (
     <section className="display-resources">
       {appState.allResources.map((resource) => (

@@ -19,7 +19,7 @@ export function CommentSection({
   const [comments, setComments] = useState<IComment[]>([]);
   useEffect(() => {
     getComments(resource.resourceID).then((comments) => setComments(comments));
-  }, [setComments]);
+  }, [setComments, resource.resourceID]);
   return (
     <>
       <Accordion>
