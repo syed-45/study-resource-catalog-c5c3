@@ -3,6 +3,7 @@ import { Button, Card } from "react-bootstrap";
 import { getLikes, IPreferences } from "../utils/getLikes";
 import { IAppState, IResource, Preference } from "../utils/interfaces";
 import { CommentSection } from "./CommentSection";
+import { formatTimestamp } from "../utils/formatTimestamp";
 
 interface ResourceCardProps {
   appState: IAppState;
@@ -52,6 +53,8 @@ export function ResourceCard({
           {resource.title}
           <Card.Subtitle className="mb-2 text-muted">
             by {resource.author}
+            <br />
+            {formatTimestamp(resource.timestamp)}
           </Card.Subtitle>
         </div>
         <div className="like-buttons">
