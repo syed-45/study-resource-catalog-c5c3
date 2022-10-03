@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { getResources } from "../utils/getResources";
 import { IAppState } from "../utils/interfaces";
+import { refreshFaves } from "../utils/refreshFaves";
 import { ResourceCard } from "./ResourceCard";
 
-interface DisplayResourcesProps {
+export interface AppStateProps {
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
@@ -11,7 +12,10 @@ interface DisplayResourcesProps {
 export function DisplayResources({
   appState,
   setAppState,
-}: DisplayResourcesProps): JSX.Element {
+}: AppStateProps): JSX.Element {
+  useEffect(() => {
+    refreshFaves({ appState, setAppState });
+  }, [setAppState]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     getResources().then((allResources) =>
       setAppState((prev) => ({ ...prev, allResources: allResources }))
@@ -24,6 +28,7 @@ export function DisplayResources({
           key={resource.resourceID}
           resource={resource}
           appState={appState}
+          setAppState={setAppState}
         />
       ))}
     </section>

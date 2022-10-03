@@ -8,7 +8,7 @@ export function initialiseAppState(): IAppState {
   const nullAppState: IAppState = {
     loggedInUser: null,
     userList: [],
-    studyResources: [],
+    faveResources: [],
     allResources: [],
     searchAllResources: nullSearchQuery,
     searchStudyResources: nullSearchQuery,
