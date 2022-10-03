@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { getFavourites } from "../utils/getFavourites";
 import { getResources } from "../utils/getResources";
 import { IAppState } from "../utils/interfaces";
 import { refreshFaves } from "../utils/refreshFaves";
@@ -16,7 +15,7 @@ export function DisplayResources({
 }: AppStateProps): JSX.Element {
   useEffect(() => {
     refreshFaves({ appState, setAppState });
-  }, [setAppState]);
+  }, [setAppState]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     getResources().then((allResources) =>
       setAppState((prev) => ({ ...prev, allResources: allResources }))

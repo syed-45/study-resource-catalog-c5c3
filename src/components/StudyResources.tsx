@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { getFavourites } from "../utils/getFavourites";
-import { IAppState, IResource } from "../utils/interfaces";
+import { useEffect } from "react";
+
+import { IAppState } from "../utils/interfaces";
 import { refreshFaves } from "../utils/refreshFaves";
 import { ResourceCard } from "./ResourceCard";
 
@@ -15,7 +15,7 @@ export function StudyResources({
 }: StudyResourcesProps): JSX.Element {
   useEffect(() => {
     refreshFaves({ appState, setAppState });
-  }, [setAppState]);
+  }, [setAppState]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       {appState.faveResources.map((resource) => (

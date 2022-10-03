@@ -40,12 +40,10 @@
   grid-template-columns: 3fr 2fr;
 }
 
-
 .like-buttons {
   display: flex;
   flex-direction: row;
   text-align: right;
-  
 }
 
 .like-buttons * {

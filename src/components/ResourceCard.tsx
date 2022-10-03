@@ -54,13 +54,13 @@ export function ResourceCard({
   function handleFavourite() {
     appState.loggedInUser &&
       postFavourites(appState.loggedInUser.userID, resource.resourceID).then(
-        () => refreshFaves({ appState, setAppState })
+        () => refreshFaves({ appState, setAppState }) // eslint-disable-line react-hooks/exhaustive-deps
       );
   }
   function handleDeleteFaves() {
     appState.loggedInUser &&
       deleteFavourites(appState.loggedInUser.userID, resource.resourceID).then(
-        () => refreshFaves({ appState, setAppState })
+        () => refreshFaves({ appState, setAppState }) // eslint-disable-line react-hooks/exhaustive-deps
       );
   }
 
@@ -126,7 +126,11 @@ export function ResourceCard({
           {`show ${showLess ? "more" : "less"}`}
         </Button>
       </Card.Body>
-      <CommentSection resource={resource} appState={appState} />
+      <CommentSection
+        key={`comment-${resource.resourceID}`}
+        resource={resource}
+        appState={appState}
+      />
     </Card>
   );
 }
