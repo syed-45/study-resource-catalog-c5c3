@@ -5,15 +5,20 @@ import { IAppState, IResource, Preference } from "../utils/interfaces";
 import { CommentSection } from "./CommentSection";
 import { formatTimestamp } from "../utils/formatTimestamp";
 import { submitPreferences } from "../utils/submitLike";
+import { postFavourites } from "../utils/postFavourites";
+import { deleteFavourites } from "../utils/deleteFavourites";
+import { refreshFaves } from "../utils/refreshFaves";
 
 interface ResourceCardProps {
   appState: IAppState;
   resource: IResource;
+  setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
 
 export function ResourceCard({
   resource,
   appState,
+  setAppState,
 }: ResourceCardProps): JSX.Element {
   const [showLess, setShowLess] = useState(true);
   const [preferences, setPreferences] = useState<IPreferences>({
@@ -46,7 +51,24 @@ export function ResourceCard({
       });
     }
   };
+  function handleFavourite() {
+    appState.loggedInUser &&
+      postFavourites(appState.loggedInUser.userID, resource.resourceID).then(
+        () => refreshFaves({ appState, setAppState })
+      );
+  }
+  function handleDeleteFaves() {
+    appState.loggedInUser &&
+      deleteFavourites(appState.loggedInUser.userID, resource.resourceID).then(
+        () => refreshFaves({ appState, setAppState })
+      );
+  }
 
+  function isFavourite(key: number) {
+    return appState.faveResources.some(
+      (resource) => resource.resourceID === key
+    );
+  }
   return (
     <Card
       key={resource.resourceID}
@@ -63,6 +85,23 @@ export function ResourceCard({
           </Card.Subtitle>
         </div>
         <div className="like-buttons">
+          {isFavourite(resource.resourceID) ? (
+            <Button
+              variant="outline-danger"
+              onClick={handleDeleteFaves}
+              disabled={appState.loggedInUser === null}
+            >
+              🗑️
+            </Button>
+          ) : (
+            <Button
+              variant="outline-success"
+              onClick={handleFavourite}
+              disabled={appState.loggedInUser === null}
+            >
+              📖
+            </Button>
+          )}
           <Button
             variant="outline-success"
             onClick={() => handlePreference("like")}

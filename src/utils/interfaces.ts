@@ -1,7 +1,7 @@
 export interface IAppState {
   loggedInUser: IUser | null;
   userList: IUser[];
-  studyResources: IResource[];
+  faveResources: IResource[];
   allResources: IResource[];
   searchAllResources: ISearchQuery;
   searchStudyResources: ISearchQuery;
@@ -17,7 +17,9 @@ export interface IUser {
 export const BASEURL = "https://study-resource-catalog-c5c3.herokuapp.com";
 // export const BASEURL = "http://localhost:4000"
 export type Preference = "like" | "dislike";
+
 export type ResourceID = number;
+
 export interface IResource {
   resourceID: ResourceID;
   submitter: userID;

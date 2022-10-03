@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFavourites } from "../utils/getFavourites";
 import { IAppState, IResource } from "../utils/interfaces";
+import { refreshFaves } from "../utils/refreshFaves";
 import { ResourceCard } from "./ResourceCard";
 
 interface StudyResourcesProps {
@@ -8,19 +9,22 @@ interface StudyResourcesProps {
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
 }
 
-export function StudyResources({ appState }: StudyResourcesProps): JSX.Element {
-  const [faves, setFaves] = useState<IResource[]>([]);
+export function StudyResources({
+  appState,
+  setAppState,
+}: StudyResourcesProps): JSX.Element {
   useEffect(() => {
-    if (appState.loggedInUser !== null) {
-      getFavourites(appState.loggedInUser.userID).then((fetchedFaves) =>
-        setFaves((prev) => fetchedFaves)
-      );
-    }
-  }, [setFaves]);
+    refreshFaves({ appState, setAppState });
+  }, [setAppState]);
   return (
     <>
-      {faves.map((resource) => (
-        <ResourceCard key={resource.resourceID} resource={resource} appState={appState} />
+      {appState.faveResources.map((resource) => (
+        <ResourceCard
+          key={resource.resourceID}
+          resource={resource}
+          appState={appState}
+          setAppState={setAppState}
+        />
       ))}
     </>
   );
