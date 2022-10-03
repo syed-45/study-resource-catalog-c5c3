@@ -5,17 +5,18 @@ import {
   Itag,
   IWeek,
 } from "../components/SubmitResource";
+import { BASEURL } from "./interfaces";
 
 export async function getTags(): Promise<Itag[]> {
   const res = await axios.get(
-    "https://study-resource-catalog-c5c3.herokuapp.com/tablename/tags"
+    `${BASEURL}/tablename/tags`
   );
   return res.data;
 }
 
 export async function getWeeks(): Promise<IWeek[]> {
   const res = await axios.get(
-    "https://study-resource-catalog-c5c3.herokuapp.com/tablename/buildweeks"
+    `${BASEURL}/tablename/buildweeks`
   );
   return res.data;
 }
@@ -24,14 +25,14 @@ export async function getRecommendationOptions(): Promise<
   IRecommendationOption[]
 > {
   const res = await axios.get(
-    "https://study-resource-catalog-c5c3.herokuapp.com/tablename/recommendations"
+    `${BASEURL}/tablename/recommendations`
   );
   return res.data;
 }
 
 export async function getContentTypes(): Promise<IContentType[]> {
   const res = await axios.get(
-    "https://study-resource-catalog-c5c3.herokuapp.com/tablename/contenttypes"
+    `${BASEURL}/tablename/contenttypes`
   );
   return res.data;
 }
