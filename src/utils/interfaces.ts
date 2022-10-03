@@ -1,3 +1,5 @@
+import { Itag } from "../components/SubmitResource";
+
 export interface IAppState {
   loggedInUser: IUser | null;
   userList: IUser[];
@@ -5,6 +7,12 @@ export interface IAppState {
   allResources: IResource[];
   searchAllResources: ISearchQuery;
   searchStudyResources: ISearchQuery;
+  currentTags: ITagResource[];
+}
+
+export interface ITagResource {
+  tagName: string;
+  resourceID: number;
 }
 
 export type userID = number;
@@ -14,8 +22,8 @@ export interface IUser {
   isFaculty: boolean;
 }
 
-export const BASEURL = "https://study-resource-catalog-c5c3.herokuapp.com";
-// export const BASEURL = "http://localhost:4000"
+// export const BASEURL = "https://study-resource-catalog-c5c3.herokuapp.com";
+export const BASEURL = "http://localhost:4000";
 export type Preference = "like" | "dislike";
 export type ResourceID = number;
 export interface IResource {
@@ -39,7 +47,7 @@ export interface IComment {
 
 export interface ISearchQuery {
   searchTerm: string;
-  tag: string[];
+  tag: Itag[];
 }
 
 export interface ILike {
