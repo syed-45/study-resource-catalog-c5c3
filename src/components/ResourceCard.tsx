@@ -32,12 +32,6 @@ export function ResourceCard({
     get likes again to get source of truth
     */
 
-    // if (preference === "like") {
-    //   setPreferences({ ...preferences, likes: preferences.likes + 1 });
-    // } else {
-    //   setPreferences({ ...preferences, dislikes: preferences.dislikes + 1 });
-    // }
-
     // API requests
     if (appState.loggedInUser) {
       submitPreferences(
