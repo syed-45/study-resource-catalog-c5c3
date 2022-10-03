@@ -5,7 +5,7 @@ import { getTagsWithResources } from "../utils/getTagsWithResources";
 import { IAppState, IResource } from "../utils/interfaces";
 import { ResourceCard } from "./ResourceCard";
 import SearchBar from "./SearchBar";
-import SearchBarForTags from "./SearchBarTags";
+// import SearchBarForTags from "./SearchBarTags";
 interface DisplayResourcesProps {
   appState: IAppState;
   setAppState: React.Dispatch<React.SetStateAction<IAppState>>;
@@ -25,7 +25,7 @@ export function DisplayResources({
   // console.log(appState.currentTags);
   return (
     <>
-      <SearchBarForTags appState={appState} setAppState={setAppState} />
+      {/* <SearchBarForTags appState={appState} setAppState={setAppState} /> */}
       <SearchBar appState={appState} setAppState={setAppState} />
       <section className="display-resources">
         {appState.allResources.map((resource: IResource, index) => {
