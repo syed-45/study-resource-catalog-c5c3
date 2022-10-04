@@ -77,7 +77,7 @@ export function ResourceCard({
     >
       <Card.Header className="resource-card-header">
         <div className="card-title">
-          {resource.title}
+          <a href={`${resource.URL}`}>{resource.title}</a>
           <Card.Subtitle className="mb-2 text-muted">
             by {resource.author}
             <br />
