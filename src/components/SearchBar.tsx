@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 import { IAppState } from "../utils/interfaces";
 interface SearchBarProps {
   appState: IAppState;
@@ -10,14 +11,19 @@ export default function SearchBar({
 }: SearchBarProps): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className="form-group" style={{ marginTop: "50px", display: "flex", justifyContent: "center" }}>
-      <input className="form-control text-center" style={{width:"400px"}}
+    <div
+      className="form-group"
+      style={{ marginTop: "50px", display: "flex", justifyContent: "center" }}
+    >
+      <input
+        className="form-control text-center"
+        style={{ width: "400px" }}
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }}
       />
-      <button
-      className="btn-primary"
+      <Button
+        variant="light"
         onClick={() => {
           setAppState({
             ...appState,
@@ -29,7 +35,7 @@ export default function SearchBar({
         }}
       >
         Search
-      </button>
+      </Button>
     </div>
   );
 }
