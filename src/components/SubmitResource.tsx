@@ -186,7 +186,7 @@ export function SubmitResource({
     if (weekData.status === 200) {
       toast.success("Rescource submitted successfully!");
     }
-    // navigate("/");
+    navigate("/");
   }
 
   return (
