@@ -106,10 +106,17 @@ export function SubmitResource({
       toast.warning("Please insert the title");
       return;
     }
+
     if (inputs.URL.length === 0) {
       toast.warning("Please insert the link");
       return;
     }
+
+    if (!inputs.URL.includes("http://") || !inputs.URL.includes("https://")) {
+      toast.warning("Please insert the link with https:// or http://");
+      return;
+    }
+
     if (selectedContentType.content_type.length === 0) {
       toast.warning("You need to select a content type");
       return;
