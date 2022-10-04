@@ -112,7 +112,7 @@ export function SubmitResource({
       return;
     }
 
-    if (!/^(?:[a-z]+:)?\/\//i.test(inputs.URL)) {      
+    if (!/^(?:[a-z]+:)?\/\//i.test(inputs.URL)) {
       toast.warning("Please insert a valid link");
       return;
     }
