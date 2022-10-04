@@ -1,4 +1,8 @@
+import { useEffect } from "react";
+
 import { IAppState } from "../utils/interfaces";
+import { refreshFaves } from "../utils/refreshFaves";
+import { ResourceCard } from "./ResourceCard";
 
 interface StudyResourcesProps {
   appState: IAppState;
@@ -9,5 +13,19 @@ export function StudyResources({
   appState,
   setAppState,
 }: StudyResourcesProps): JSX.Element {
-  return <p>Study Resources Pages</p>;
+  useEffect(() => {
+    refreshFaves({ appState, setAppState });
+  }, [setAppState]); // eslint-disable-line react-hooks/exhaustive-deps
+  return (
+    <>
+      {appState.faveResources.map((resource) => (
+        <ResourceCard
+          key={resource.resourceID}
+          resource={resource}
+          appState={appState}
+          setAppState={setAppState}
+        />
+      ))}
+    </>
+  );
 }
