@@ -18,7 +18,7 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
   useEffect(() => {
     const getUsers = async () => {
       const listOfUsers: IUser[] = await getUserList();
-      console.log(listOfUsers);
+      // console.log(listOfUsers);
       setAppState((appState) => ({ ...appState, userList: listOfUsers }));
     };
     getUsers();
@@ -66,7 +66,7 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
         >
           <option value=""> Select User </option>
           {appState.userList.map((user) => {
-            console.log("inside loop", user);
+            // console.log("inside loop", user);
             return (
               <option key={user.userID} value={user.userID.toString()}>
                 {user.username}

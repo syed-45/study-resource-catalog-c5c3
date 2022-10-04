@@ -12,6 +12,7 @@ export function initialiseAppState(): IAppState {
     allResources: [],
     searchAllResources: nullSearchQuery,
     searchStudyResources: nullSearchQuery,
+    currentTags: [],
   };
   return nullAppState;
 }
