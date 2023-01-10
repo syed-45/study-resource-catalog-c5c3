@@ -8,7 +8,7 @@ import {
   getTags,
   getWeeks,
 } from "../utils/getStaticData";
-import { IAppState, IResource } from "../utils/interfaces";
+import { BASEURL, IAppState, IResource } from "../utils/interfaces";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { initialInputs } from "../utils/initialiseInputs";
@@ -146,14 +146,14 @@ export function SubmitResource({
     };
 
     const response = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/resources", //change to heroku
+      `${BASEURL}/resources`, //change to heroku
       data
     );
 
     const resourceData: IResource = response.data;
 
     const contentTypeResponse = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/tablename/content_types_resource",
+      `${BASEURL}/tablename/content_types_resource`,
       {
         content_type: selectedContentType.content_type,
         resource_id: resourceData.resourceID,
@@ -165,7 +165,7 @@ export function SubmitResource({
     }
 
     const tagDataResponse = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/tablename/tag_resource",
+      `${BASEURL}/tablename/tag_resource`,
       {
         tag_name: selectedTags,
         resource_id: resourceData.resourceID,
@@ -176,7 +176,7 @@ export function SubmitResource({
     }
 
     const weekData = await axios.post(
-      "https://study-resource-catalog-c5c3.herokuapp.com/tablename/buildweek_resource",
+      `${BASEURL}/tablename/buildweek_resource`,
       {
         build_week_name: selectedWeek.build_week_name,
         resource_id: resourceData.resourceID,

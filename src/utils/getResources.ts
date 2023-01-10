@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IResource } from "./interfaces";
+import { BASEURL, IResource } from "./interfaces";
 
 export interface IDBResources {
   resource_id: number;
@@ -15,7 +15,7 @@ export interface IDBResources {
 export async function getResources(): Promise<IResource[]> {
   try {
     const response = await axios.get(
-      "https://study-resource-catalog-c5c3.herokuapp.com/resources"
+      `${BASEURL}/resources`
     );
     const resources: IResource[] = response.data.map((row: IDBResources) => ({
       resourceID: row.resource_id,
