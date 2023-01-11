@@ -7,12 +7,12 @@ interface NavigationBarProps {
 
 export function Footer({ appState }: NavigationBarProps): JSX.Element {
   return (
-    <div>
+    <footer>
       <Navbar bg="warning" variant="light">
         <Container>
           <Navbar.Brand>Made By Team C5C3</Navbar.Brand>
         </Container>
       </Navbar>
-    </div>
+    </footer>
   );
 }
