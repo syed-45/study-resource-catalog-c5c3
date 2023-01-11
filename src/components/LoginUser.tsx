@@ -55,7 +55,7 @@ function LoginUser({ appState, setAppState }: LoginUserProps): JSX.Element {
 
   return (
     <>
-      <div>
+      <div className="login-form">
         <Form.Select
           aria-label="Default select example"
           className="user-dropdown"

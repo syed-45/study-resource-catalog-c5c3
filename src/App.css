@@ -1,8 +1,19 @@
-.logged-status {
-  margin: 10px;
+.login-form {
+  margin-right: 10px;
+  text-align: center;
 }
-.user-dropdown {
-  margin: 10px;
+
+.logged-status {
+  color: white;
+}
+
+.app-navbar {
+  color: white;
+  font-weight: bolder;
+}
+
+:hover .app-navbar {
+  color: white;
 }
 
 .display-resources {
