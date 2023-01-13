@@ -17,8 +17,8 @@
 .tags-cloud {
   display: flex;
   flex-flow: row wrap;
-  gap: 5%;
-  height: 200px;
+  /* gap: 5%; */
+  height: 300px;
   border-width: 1px;
   border-color: rgb(176, 174, 174);
   border-style: solid;
@@ -27,16 +27,14 @@
 
 .buttonTag {
   border-radius: 15px;
-  margin: 5px;
-  width: 40px;
+  margin: 15px;
+  width: 10%;
+  height: 20%;
   border-width: 1px;
 }
 
 .buttonTag:hover {
-  border-width: 3px !important;
+  /* border-width: 3px !important; */
   border-style: solid;
 }
 
-.tags-cloud > button {
-  width: 20%;
-}

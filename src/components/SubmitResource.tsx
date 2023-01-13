@@ -222,15 +222,15 @@ export function SubmitResource({
           {contentTypes.map((contentType, index) => {
             return <option key={index}> {contentType.content_type}</option>;
           })}
-        </select>
-        <div className="tags-cloud text-center">
+        </select>        
+        <div className="tags-cloud">
           {tags.map((tag: Itag, index): JSX.Element => {
             return (
               <button
                 className="buttonTag"
                 style={{
                   backgroundColor: selectedTags.includes(tag.tag_name)
-                    ? "rgb(0, 145, 0)"
+                    ? "#36ffa2"
                     : "white",
                 }}
                 onClick={() => handleTagClick(tag.tag_name)}
