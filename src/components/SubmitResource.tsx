@@ -222,7 +222,7 @@ export function SubmitResource({
           {contentTypes.map((contentType, index) => {
             return <option key={index}> {contentType.content_type}</option>;
           })}
-        </select>        
+        </select>
         <div className="selectTagsText"> Select relavent tags</div>
         <div className="tags-cloud">
           {tags.map((tag: Itag, index): JSX.Element => {
