@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IUser } from "./interfaces";
+import { BASEURL, IUser } from "./interfaces";
 
 interface IDBUSer {
   user_id: number;
@@ -7,9 +7,7 @@ interface IDBUSer {
   is_faculty: boolean;
 }
 export async function getUserList(): Promise<IUser[]> {
-  const res = await axios.get(
-    `https://study-resource-catalog-c5c3.herokuapp.com/tablename/users`
-  );
+  const res = await axios.get(`${BASEURL}/tablename/users`);
   const listOfUsers: IUser[] = [];
 
   res.data.forEach((item: IDBUSer) => {

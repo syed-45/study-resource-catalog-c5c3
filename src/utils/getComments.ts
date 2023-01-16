@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IComment, ResourceID } from "./interfaces";
+import { BASEURL, IComment, ResourceID } from "./interfaces";
 
 // TODO missing resourceID against a commment
 /**
@@ -24,7 +24,7 @@ comment_id SERIAL PRIMARY KEY,
 
   try {
     const response = await axios.get(
-      `https://study-resource-catalog-c5c3.herokuapp.com/resources/comments/${resourceid}`
+      `${BASEURL}/resources/comments/${resourceid}`
     );
     const comments: IComment[] = response.data.map((row: IDBComments) => ({
       userID: row.user_id,

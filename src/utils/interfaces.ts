@@ -22,7 +22,7 @@ export interface IUser {
   isFaculty: boolean;
 }
 
-export const BASEURL = "https://study-resource-catalog-c5c3.herokuapp.com";
+export const BASEURL = "https://study-resources-backend.onrender.com";
 // export const BASEURL = "http://localhost:4000";
 export type Preference = "like" | "dislike";
 

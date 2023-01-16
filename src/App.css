@@ -1,8 +1,20 @@
-.logged-status {
-  margin: 10px;
+.login-form {
+  margin-right: 10px;
+  margin-top: 15px;
+  text-align: center;
 }
-.user-dropdown {
-  margin: 10px;
+
+.logged-status {
+  color: white;
+}
+
+.app-navbar {
+  color: white;
+  font-weight: bolder;
+}
+
+:hover .app-navbar {
+  color: white;
 }
 
 .display-resources {
@@ -17,6 +29,23 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    font-size: 25px;
+  }
+  nav {
+    height: 7vh;
+    font-size: 25px;
+  }
+  .login-form {
+    width: 25%;
+    font-size: 20px;
+  }
+
+  .login-form > select {
+    line-height: 3;
+  }
+
+  button > a {
+    font-size: 30px;
   }
 }
 
@@ -55,4 +84,20 @@
 
 .hideCaret {
   caret-color: transparent;
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+
+main {
+  padding-bottom: 2.5rem; /* Footer height */
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; /* Footer height */
 }
