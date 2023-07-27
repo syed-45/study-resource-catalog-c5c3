@@ -32,13 +32,20 @@ The Study Resources App follows a client-server architecture, with a React-based
 
 ### API Documentation
 
-The API endpoints are documented in [notion](https://www.notion.so/weareacademy/351212317e3a48e988e3f262fc392863?v=8753decd54bb441f83660477dbcec45e). It provides details about the available routes, request parameters, and response formats.
+The API endpoints weere documented on notion. It provides details about the available routes, request parameters, and response formats.
+
+![API Documentation](https://github.com/syed-45/study-resource-catalog-c5c3/assets/86778040/caaf2365-1b5d-49ab-8ac4-d8599a6e78f9)
+
 
 ### Wireframes
 
 The wireframes for the Study Resources App were designed using Figma.
 
 ![Figma Wireframes](https://github.com/syed-45/study-resource-catalog-c5c3/assets/86778040/f1e02623-173f-46a6-9af5-0ef4687d21eb)
+
+### Database Model
+
+The database model can be found on this [Figma file](https://www.figma.com/file/m5dMsVrDq39klhD9dF7kXQ/academy-resource-app?type=design&node-id=12-138&mode=design&t=bfOBCinb2LOPXkex-0). The relational database was designed to be normalised and consists of 12 different tables.
 
 
 ### Project Board
